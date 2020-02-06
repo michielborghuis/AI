@@ -1,0 +1,11 @@
+Opdracht 4 - Palindroom
+Schrijf een functie die checkt of een woord een palindroom is. Schrijf een versie die gebruikt maakt van een bibliotheekfunctie die een string voor je omdraait. Maak ook een versie waarbij jij zelf het omdraaien verzorgt. Probeer zo min mogelijk code te gebruiken.
+
+Opdracht 5 - Sorteren
+Bedenk en schrijf zelf een functie die een lijst met getallen op volgorde sorteert.
+
+Opdracht 6 - Gemiddelde berekenen
+Schrijf een functie die het gemiddelde van een lijst met cijfers berekend. Schrijf er ook een die als input een lijst van lijsten met cijfers berekend.
+
+Opdracht 7 - Random
+Schrijf een programma dat een willekeurig getal kiest en de gebruiker net zo lang laat gokken tot dat ze het goed hebben.
