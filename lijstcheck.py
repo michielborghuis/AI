@@ -1,7 +1,6 @@
 lst1 = [3, 9, 6, 8, 2, 9, 5, 2, 3, 3, 3]
 lst2 = [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1,
        1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0]
-string = 'Hello world!!!'
 
 def count(lst, number):
     counter = 0
@@ -29,20 +28,6 @@ def ones_and_zeros(lst, number0, number1):
     else:
         return 'De lijst voldoet niet aan de voorwaarden!'
 
-def palindroom1(string):
-    palin = string[::-1]
-    return palin
-
-def palindroom2(string):
-    palin = ''
-    i = len(string)
-    while i > 0:
-        palin += string[i-1]
-        i -= 1
-    return palin
-
 print(count(lst1, int(input('Geef een getal: '))))
 print(difference(lst1))
 print(ones_and_zeros(lst2, 0, 1))
-print(palindroom1(string))
-print(palindroom2(string))
