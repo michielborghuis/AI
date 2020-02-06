@@ -18,3 +18,6 @@ def piramide_while():
 
 piramide_for()
 piramide_while()
+
+
+#print(f'{mystring:>{size}}')
