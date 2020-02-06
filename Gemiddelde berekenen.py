@@ -21,6 +21,6 @@ def average(list_of_lists):
             som += getal
             aantal += 1
         average = som/aantal
-        return average
+        print(average)
 
 print(average(list_maker()))
