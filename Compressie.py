@@ -10,3 +10,5 @@ for line in lines:
         line = line.lstrip()
         newfile.write(line)
 newfile.close()
+
+#lstrip methode gevonden op https://stackoverflow.com/questions/959215/how-do-i-remove-leading-whitespace-in-python
