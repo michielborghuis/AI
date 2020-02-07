@@ -1,9 +1,12 @@
-def compressie():
-    infile = open('test123.txt', 'r')
-    content = infile.read()
-    infile.close()
+myfile = open('test123.txt', 'r')
+newfile = open('new123.txt', 'a')
+lines = myfile.readlines()
+myfile.close()
 
-    compressie = content.strip()
-    print(compressie)
-
-print(compressie())
+for line in lines:
+    if line == '\n':
+        del line
+    else:
+        line = line.lstrip()
+        newfile.write(line)
+newfile.close()
