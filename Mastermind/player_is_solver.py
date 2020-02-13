@@ -60,6 +60,7 @@ def play(all_pos):
         guess_input = input('Speler 2, doe een gok (vb. 2534): ')
         for i in guess_input:
             guess.append(int(i))
+
         all_guesses.append(guess)
         all_pins.append(pins(guess, solution))
         (remover(all_pos, solution, guess))

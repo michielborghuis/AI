@@ -1,7 +1,5 @@
 import random
 
-voorbeeld_guess = [1, 1, 2, 2]
-
 def all_possibilities():
     lst1 = [1, 2, 3, 4, 5, 6]
     lst2 = [1, 2, 3, 4, 5, 6]
@@ -60,46 +58,41 @@ def best_choise(all_pos1, all_pos2, guess):
                 number_of_cancellations.update(update)
     return number_of_cancellations
 
-temp_dict = best_choise(all_pos1, all_pos2, voorbeeld_guess)
 
-print(best_choise(all_pos1, all_pos2, voorbeeld_guess))
-print('------------------------------------------------')
-print(max(temp_dict, key=temp_dict.get))
-print('------------------------------------------------')
 
 def play(all_pos1):
     count = 0
-    if len(all_pos1) < 2:
-        return count
-
-    else:
-        solution = []
-        solution_input = input('Speler 1, geef de oplossing (vb. 2534): ')
-        for i in solution_input:
-            solution.append(int(i))
-        guess = []
-        while guess != solution:
+    solution = []
+    solution_input = input('Speler 1, geef de oplossing (vb. 2534): ')
+    for i in solution_input:
+        solution.append(int(i))
+    guess = []
+    while guess != solution:
+        count += 1                                      #5656, 1122 geeft 256, 1333 geeft 81
+        if len(all_pos1) == 2:
+            guess = all_pos1[0]
+        elif len(all_pos1) == 1:
+            guess = all_pos1[0]
+        else:
             guess = []
-            count += 1
-
             #for i in range(0, 4):
             #    guess.append(random.randrange(1, 7))
-
             guess_input = input('Speler 2, doe een gok (vb. 2534): ')
             for i in guess_input:
                 guess.append(int(i))
 
-            temp_dict = best_choise(all_pos1, all_pos2, voorbeeld_guess)
+            temp_dict = best_choise(all_pos1, all_pos2, guess)
 
-            print(best_choise(all_pos1, all_pos2, voorbeeld_guess))
+            print(best_choise(all_pos1, all_pos2, guess))
             print('------------------------------------------------')
             print(min(temp_dict, key=temp_dict.get))
             print('------------------------------------------------')
+            next_guess = max(temp_dict, key=temp_dict.get)
 
-            print(pins(guess, solution))
+            print(pins(next_guess, solution))
             print(remover(all_pos1, solution, guess))
             #print(graph(remover(all_pos1, solution, guess)))
 
-        print('In {} stappen.'.format(count))
+    print('In {} stappen.'.format(count))
 
 play(all_pos1)
