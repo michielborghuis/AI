@@ -4,12 +4,9 @@ steps = []
 for i in range(1000):
     def all_possibilities():
         lst1 = [1, 2, 3, 4, 5, 6]
-        lst2 = [1, 2, 3, 4, 5, 6]
-        lst3 = [1, 2, 3, 4, 5, 6]
-        lst4 = [1, 2, 3, 4, 5, 6]
 
-        all_pos = [[a, b, c, d] for a in lst1 for b in lst2
-                   for c in lst3 for d in lst4] # alle mogelijke combinaties
+        all_pos = [[a, b, c, d] for a in lst1 for b in lst1
+                   for c in lst1 for d in lst1] # alle mogelijke combinaties
         return all_pos
 
     all_pos1 = all_possibilities()
@@ -73,3 +70,5 @@ for i in range(1000):
 print('minimale aantal stappen = ' + str(min(steps)))
 print('maximale aantal stappen = ' + str(max(steps)))
 print('gemiddeld aantal stappen = ' + str(sum(steps)/len(steps)))
+
+print(pins([1, 1, 1, 2], [5, 2, 5, 5]))

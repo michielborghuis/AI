@@ -2,12 +2,9 @@ import random
 
 def all_possibilities():
     lst1 = [1, 2, 3, 4, 5, 6]
-    lst2 = [1, 2, 3, 4, 5, 6]
-    lst3 = [1, 2, 3, 4, 5, 6]
-    lst4 = [1, 2, 3, 4, 5, 6]
 
-    all_pos = [[a, b, c, d] for a in lst1 for b in lst2
-               for c in lst3 for d in lst4] # alle mogelijke combinaties
+    all_pos = [[a, b, c, d] for a in lst1 for b in lst1
+               for c in lst1 for d in lst1] # alle mogelijke combinaties
     return all_pos
 
 all_pos1 = all_possibilities()
@@ -47,52 +44,75 @@ def remover(all_pos1, solution, guess):
     return all_pos1
 
 
-def best_choise(all_pos1, all_pos2, guess):
-    number_of_cancellations = {}
+def graph(all_pos1, all_pos2):
+    maximum = {}
     for i in all_pos1:
-        counter = 0
+        nul_nul = 0
+        nul_een = 0
+        nul_twee = 0
+        nul_drie = 0
+        nul_vier = 0
+        een_nul = 0
+        een_een = 0
+        een_twee = 0
+        een_drie = 0
+        twee_nul = 0
+        twee_een = 0
+        twee_twee = 0
+        drie_nul = 0
+        vier_nul = 0
         for j in all_pos2:
-            if pins(guess, i) != pins(guess, j):
-                counter += 1
-                update = {str(i) : counter}
-                number_of_cancellations.update(update)
-    return number_of_cancellations
+            if pins(i, j) == [0, 0]:
+                nul_nul += 1
+            if pins(j, i) == [0, 1]:
+                nul_een += 1
+            if pins(i, j) == [0, 2]:
+                nul_twee += 1
+            if pins(i, j) == [0, 3]:
+                nul_drie += 1
+            if pins(i, j) == [0, 4]:
+                nul_vier += 1
+            if pins(i, j) == [1, 0]:
+                een_nul += 1
+            if pins(i, j) == [1, 1]:
+                een_een += 1
+            if pins(i, j) == [1, 2]:
+                een_twee += 1
+            if pins(i, j) == [1, 3]:
+                een_drie += 1
+            if pins(i, j) == [2, 0]:
+                twee_nul += 1
+            if pins(i, j) == [2, 1]:
+                twee_een += 1
+            if pins(i, j) == [2, 2]:
+                twee_twee += 1
+            if pins(i, j) == [3, 0]:
+                drie_nul += 1
+            if pins(i, j) == [4, 0]:
+                vier_nul += 1
+        #temp_lijst = [str(i), nul_nul, nul_een, nul_twee, nul_drie, nul_vier, een_nul, een_een, een_twee, een_drie, twee_nul, twee_een, twee_twee, drie_nul, vier_nul]
+        update = {tuple(i) : max(nul_nul, nul_een, nul_twee, nul_drie, nul_vier, een_nul, een_een, een_twee, een_drie, twee_nul, twee_een, twee_twee, drie_nul, vier_nul)}
+        maximum.update(update)
+        next_guess = list(min(temp_maximum, key=temp_maximum.get))
+        return next_guess
 
 
 
-def play(all_pos1):
+def play(all_pos1, all_pos2):
     count = 0
     solution = []
     solution_input = input('Speler 1, geef de oplossing (vb. 2534): ')
     for i in solution_input:
         solution.append(int(i))
-    guess = []
-    while guess != solution:
-        count += 1                                      #5656, 1122 geeft 256, 1333 geeft 81
+    next_guess = graph(all_pos1, all_pos2)
+    while next_guess != solution:
+        count += 1
         if len(all_pos1) == 2:
-            guess = all_pos1[0]
+            next_guess = all_pos1[0]
         elif len(all_pos1) == 1:
-            guess = all_pos1[0]
+            next_guess = all_pos1[0]
         else:
-            guess = []
-            #for i in range(0, 4):
-            #    guess.append(random.randrange(1, 7))
-            guess_input = input('Speler 2, doe een gok (vb. 2534): ')
-            for i in guess_input:
-                guess.append(int(i))
-
-            temp_dict = best_choise(all_pos1, all_pos2, guess)
-
-            print(best_choise(all_pos1, all_pos2, guess))
-            print('------------------------------------------------')
-            print(min(temp_dict, key=temp_dict.get))
-            print('------------------------------------------------')
-            next_guess = max(temp_dict, key=temp_dict.get)
-
-            print(pins(next_guess, solution))
-            print(remover(all_pos1, solution, guess))
-            #print(graph(remover(all_pos1, solution, guess)))
-
+            
     print('In {} stappen.'.format(count))
 
-play(all_pos1)
+play(all_pos1, all_pos2)
