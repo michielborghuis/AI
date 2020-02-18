@@ -2,7 +2,7 @@ import random
 
 
 steps = []
-for i in range(5):
+for plays in range(50):
     def all_possibilities():
         lst1 = [1, 2, 3, 4, 5, 6]
 
@@ -49,7 +49,7 @@ for i in range(5):
 
     def graph(all_pos1, all_pos2):
         maximum = {}
-        for i in all_pos1:
+        for i in all_pos2:
             nul_nul = 0
             nul_een = 0
             nul_twee = 0
@@ -64,7 +64,7 @@ for i in range(5):
             twee_twee = 0
             drie_nul = 0
             vier_nul = 0
-            for j in all_pos2:
+            for j in all_pos1:
                 if pins(i, j) == [0, 0]:
                     nul_nul += 1
                 if pins(j, i) == [0, 1]:
