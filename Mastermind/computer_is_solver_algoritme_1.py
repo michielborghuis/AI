@@ -70,5 +70,3 @@ for i in range(1000):
 print('minimale aantal stappen = ' + str(min(steps)))
 print('maximale aantal stappen = ' + str(max(steps)))
 print('gemiddeld aantal stappen = ' + str(sum(steps)/len(steps)))
-
-print(pins([1, 1, 1, 2], [5, 2, 5, 5]))
