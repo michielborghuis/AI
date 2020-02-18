@@ -32,7 +32,7 @@ for plays in range(50):
         return counter
 
 
-    def pins(guess, solution):
+    def feedback(guess, solution):
         white = white_pins(guess, solution)
         black = black_pins(guess, solution)
         white -= black  # als een pin zwart is hij in dit algoritme ook wit
@@ -41,7 +41,7 @@ for plays in range(50):
 
     def remover(all_pos1, solution, guess):
         for i in all_pos1[:]:
-            if pins(guess, i) != pins(guess, solution):
+            if feedback(guess, i) != feedback(guess, solution):
                 all_pos1.remove(i)
         print(len(all_pos1))
         return all_pos1
@@ -65,33 +65,33 @@ for plays in range(50):
             drie_nul = 0
             vier_nul = 0
             for j in all_pos1:
-                if pins(i, j) == [0, 0]:
+                if feedback(i, j) == [0, 0]:
                     nul_nul += 1
-                if pins(j, i) == [0, 1]:
+                if feedback(i, j) == [0, 1]:
                     nul_een += 1
-                if pins(i, j) == [0, 2]:
+                if feedback(i, j) == [0, 2]:
                     nul_twee += 1
-                if pins(i, j) == [0, 3]:
+                if feedback(i, j) == [0, 3]:
                     nul_drie += 1
-                if pins(i, j) == [0, 4]:
+                if feedback(i, j) == [0, 4]:
                     nul_vier += 1
-                if pins(i, j) == [1, 0]:
+                if feedback(i, j) == [1, 0]:
                     een_nul += 1
-                if pins(i, j) == [1, 1]:
+                if feedback(i, j) == [1, 1]:
                     een_een += 1
-                if pins(i, j) == [1, 2]:
+                if feedback(i, j) == [1, 2]:
                     een_twee += 1
-                if pins(i, j) == [1, 3]:
+                if feedback(i, j) == [1, 3]:
                     een_drie += 1
-                if pins(i, j) == [2, 0]:
+                if feedback(i, j) == [2, 0]:
                     twee_nul += 1
-                if pins(i, j) == [2, 1]:
+                if feedback(i, j) == [2, 1]:
                     twee_een += 1
-                if pins(i, j) == [2, 2]:
+                if feedback(i, j) == [2, 2]:
                     twee_twee += 1
-                if pins(i, j) == [3, 0]:
+                if feedback(i, j) == [3, 0]:
                     drie_nul += 1
-                if pins(i, j) == [4, 0]:
+                if feedback(i, j) == [4, 0]:
                     vier_nul += 1
             #temp_lijst = [str(i), nul_nul, nul_een, nul_twee, nul_drie, nul_vier, een_nul, een_een, een_twee, een_drie, twee_nul, twee_een, twee_twee, drie_nul, vier_nul]
             update = {tuple(i) : max(nul_nul, nul_een, nul_twee, nul_drie, nul_vier, een_nul, een_een, een_twee, een_drie, twee_nul, twee_een, twee_twee, drie_nul, vier_nul)}
