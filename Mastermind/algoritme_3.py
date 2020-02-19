@@ -59,9 +59,8 @@ def guess_maker():
 
 def algoritme_3():
     print('Welkom bij mastermind!\n'
-          'In deze versie van het spel is het de bedoeling dat je binnen 10 pogingen een code kraakt.\n'
-          'De code bestaat uit 4 pinnen die 6 verschillende kleuren kunnen hebben.\n'
           'In deze versie van het spel moet jij de code verzinnen en gaat de computer deze proberen te kraken.\n'
+          'De code bestaat uit 4 pinnen die 6 verschillende kleuren kunnen hebben.\n'
           'Veel succes!')
     count = 0
     all_pos1 = all_possibilities()
