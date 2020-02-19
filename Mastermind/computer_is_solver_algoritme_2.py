@@ -2,7 +2,7 @@ import random
 
 
 steps = []
-for plays in range(50):
+for plays in range(1):
     def all_possibilities():
         lst1 = [1, 2, 3, 4, 5, 6]
 
@@ -104,24 +104,33 @@ for plays in range(50):
     def play(all_pos1, all_pos2):
         count = 0
         solution = []
+        all_guesses = []
+        all_pins = []
         for i in range(0, 4):
             solution.append(random.randrange(1, 7))
         print(solution)
         next_guess = [1, 1, 2, 2]
         while next_guess != solution:
+            all_guesses.append(next_guess)
+            all_pins.append(feedback(next_guess, solution))
             count += 1
+            remover(all_pos1, solution, next_guess)
+
             if len(all_pos1) == 1:
                 next_guess = all_pos1[0]
-                print('solution is: ' + str(next_guess))
             else:
-                remover(all_pos1, solution, next_guess)
                 next_guess = graph(all_pos1, all_pos2)
-        print('In {} stappen.'.format(count))
-        return count
+
+            print('Je huidige bord ziet er zo uit:')
+            for i, j in zip(all_guesses, all_pins):
+                print('Kleuren: {} pinnen: {}'.format(i, j))
+        print('Kleuren: {} pinnen: {}'.format(next_guess, feedback(next_guess, solution)))
+        print('In {} stappen.'.format(count+1))
+        return count+1
 
     steps.append(play(all_pos1, all_pos2))
 
-print(steps)
+
 print('minimale aantal stappen = ' + str(min(steps)))
 print('maximale aantal stappen = ' + str(max(steps)))
 print('gemiddeld aantal stappen = ' + str(sum(steps)/len(steps)))
