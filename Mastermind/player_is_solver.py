@@ -60,7 +60,6 @@ def play(all_pos):
     all_pins = []
     for i in range(0, 4):
         solution.append(random.randrange(1, 7))
-    print(solution)
     guess = []
     while guess != solution:
         guess = []
