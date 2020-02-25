@@ -282,7 +282,7 @@ def choose_algoritme():
     algoritme = input('Kies een algoritme. Type 1, 2 of 3: ')
     if algoritme == '1':
         algoritme_1()
-    elif algoritme == '2':
+    elif algoritme == '2':               #[1, 1]
         algoritme_2()
     elif algoritme == '3':
         algoritme_3()
