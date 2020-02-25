@@ -6,7 +6,8 @@ collection1 = database['products']
 collection2 = database['profiles']
 collection3 = database['sessions']
 
-doc = collection1.find({})
+results = collection1.find({})
 
-for x in doc:
-    print(x)
+for result in results[:1]:
+    print(result["name"])
+    print(result["price"])
