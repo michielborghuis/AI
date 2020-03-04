@@ -1,8 +1,5 @@
 import mysql.connector as mysql
 import pymongo
-import os
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print(dir_path)
 
 client = pymongo.MongoClient('localhost', 27017)
 database = client['huwebshop']
@@ -41,18 +38,8 @@ def average_price():
     print(average_price)
 
 def run():
-    first_product()
-    first_product_R()
-    average_price()
+    #first_product()
+    #first_product_R()
+    #average_price()
 
-#run()
-
-def database():
-    mydb = mysql.connect(
-        host='localhost',
-        user='root',
-        passwd='Michiel1805',
-        database='webshop'
-    )
-    mycursor = mydb.cursor()
-    mycursor.execute("CREATE TABLE products (product_brand VARCHAR(50)")
+run()
