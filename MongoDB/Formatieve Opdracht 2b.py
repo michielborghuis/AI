@@ -21,7 +21,8 @@ def create_table():
     )
     mycursor = mydb.cursor()
     mycursor.execute("CREATE TABLE products (id VARCHAR(255) PRIMARY KEY, brand VARCHAR(50), color VARCHAR(20), "
-                     "gender VARCHAR(20), category VARCHAR())")
+                     "gender VARCHAR(20), category VARCHAR(255), name VARCHAR(255), price DECIMAL(10, 2), "
+                     "recommendable BOOLEAN)")
 
 
 def show_tables():
@@ -51,7 +52,8 @@ def add_data():
 
 def run():
     #create_database()
-    #create_table()
+    create_table()
     show_tables()
+    #add_data()
 
 run()
