@@ -38,8 +38,8 @@ def average_price():
     print(average_price)
 
 def run():
-    #first_product()
-    #first_product_R()
-    #average_price()
+    first_product()
+    first_product_R()
+    average_price()
 
 run()
