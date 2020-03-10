@@ -32,17 +32,33 @@ def create_table():
     mycursor.execute("DROP TABLE IF EXISTS sessions")
     mycursor.execute("DROP TABLE if EXISTS profiles")
 
+    mycursor.execute("CREATE TABLE brands ("
+                     "id VARCHAR(45) PRIMARY KEY, "
+                     "brand VARCHAR(45))")
+
+    mycursor.execute("CREATE TABLE categories ("
+                     "id VARCHAR(45) PRIMARY KEY, "
+                     "cat VARCHAR(45))")
+
+    mycursor.execute("CREATE TABLE genders ("
+                     "id VARCHAR(45) PRIMARY KEY, "
+                     "gender VARCHAR(45))")
+
+    mycursor.execute("CREATE TABLE doelgroepen ("
+                     "id VARCHAR(45) PRIMARY KEY, "
+                     "doelgroep VARCHAR(45))")
+
     mycursor.execute("CREATE TABLE products ("
                      "id VARCHAR(255) PRIMARY KEY, "
                      "name VARCHAR(255), "
-                     "cat VARCHAR(255), "
+                     "cat_id VARCHAR(255), "
                      "subcat VARCHAR(255), "
                      "subsubcat VARCHAR(255), "
-                     "brand VARCHAR(255), "
-                     "gender VARCHAR(45), "
+                     "brand_id VARCHAR(45), "
+                     "gender_id VARCHAR(45), "
                      "price DECIMAL(10,2), "
                      "herhaalaankopen BOOLEAN, "
-                     "doelgroep VARCHAR(45), "
+                     "doelgroep_id VARCHAR(45), "
                      "kleur VARCHAR(45), "
                      "descr VARCHAR(255), "
                      "discount VARCHAR(255), "
@@ -55,7 +71,11 @@ def create_table():
                      "tax VARCHAR(20), "
                      "weekdeal BOOLEAN, "
                      "size VARCHAR(45), "
-                     "recommendable BOOLEAN)")
+                     "recommendable BOOLEAN,"
+                     "FOREIGN KEY(brand_id) REFERENCES brands(id),"
+                     "FOREIGN KEY(cat_id) REFERENCES categories(id),"
+                     "FOREIGN KEY(gender_id) REFERENCES genders(id),"
+                     "FOREIGN KEY(doelgroep_id) REFERENCES doelgroepen(id))")
 
     mycursor.execute("CREATE TABLE profiles ("
                      "id VARCHAR(255) PRIMARY KEY)")
@@ -73,8 +93,13 @@ def create_table():
                      "sessionEnd VARCHAR(255), "
                      "profile_id VARCHAR(255), "
                      "product_id VARCHAR(255), "
-                     "FOREIGN KEY(product_id) REFERENCES products(id), "
-                     "FOREIGN KEY(profile_id) REFERENCES profiles(id))")
+                     "FOREIGN KEY(product_id) REFERENCES products(id))")
+
+    mycursor.execute("CREATE TABLE orders ("
+                     "sessions_id VARCHAR(255),"
+                     "profiles_id VARCHAR(45),"
+                     "FOREIGN KEY(sessions_id) REFERENCES sessions(id),"
+                     "FOREIGN KEY(profiles_id) REFERENCES profiles(id))")
 
 def show_tables():
     mydb = mysql.connect(
