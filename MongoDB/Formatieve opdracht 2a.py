@@ -17,9 +17,15 @@ def first_product():
 
 def first_product_R():
     print('\n\nOpdracht 2:')
-    results2 = collection1.find({"name": {'$regex': '^R'}})
-    for result in results2[:1]:
-        print(result["name"])
+    results2 = collection1.find({"price": {'$regex': '^.'}})
+    counter = 0
+    for result in results2:
+        print(result["price"])
+        break
+#        else:
+#            counter += 1
+#            if counter % 100000 == 0:
+#                print(counter)
 
 
 def average_price():
@@ -38,8 +44,8 @@ def average_price():
     print(average_price)
 
 def run():
-    first_product()
+    #first_product()
     first_product_R()
-    average_price()
+    #average_price()
 
 run()
