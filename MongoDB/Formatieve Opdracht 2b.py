@@ -65,12 +65,12 @@ def create_table():
                      "build VARCHAR(255), "
                      "segment VARCHAR(45), "
                      "has_sale BOOLEAN, "
-                     "order_table VARCHAR(255), "
+                     "orderTable VARCHAR(255), "
                      "sources VARCHAR(45), "
-                     "events_table VARCHAR(255), "
-                     "user_agent VARCHAR(45), "
-                     "session_start VARCHAR(255), "
-                     "session_end VARCHAR(255), "
+                     "eventsTable VARCHAR(255), "
+                     "userAgent VARCHAR(45), "
+                     "sessionStart VARCHAR(255), "
+                     "sessionEnd VARCHAR(255), "
                      "profile_id VARCHAR(255), "
                      "product_id VARCHAR(255), "
                      "FOREIGN KEY(product_id) REFERENCES products(id), "
@@ -109,7 +109,3 @@ def run():
     #add_data()
 
 run()
-
-
-
-ehhhhhhhhhhhhhhhhhh
