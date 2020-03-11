@@ -9,7 +9,7 @@ collection3 = database['sessions']
 
 def first_product():
     print('Opdracht 1:')
-    results = collection1.find({})
+    results = collection1.find({"price" : {""}})
     for result in results[:1]:
         print(result["name"])
         print(result["price"])
@@ -45,7 +45,7 @@ def average_price():
 
 def run():
     first_product()
-    first_product_R()
-    average_price()
+    #first_product_R()
+    #average_price()
 
 run()
