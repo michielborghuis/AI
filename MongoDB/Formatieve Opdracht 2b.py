@@ -48,8 +48,6 @@ def create_table():
                      "_order VARCHAR(255), "
                      "sources VARCHAR(45), "
                      "_events VARCHAR(255), "
-                     "sessionStart VARCHAR(255), "
-                     "sessionEnd VARCHAR(255), "
                      "buids_buid VARCHAR(255),"
                      "FOREIGN KEY(buids_buid) REFERENCES buids(buid))")
 
@@ -72,7 +70,7 @@ def create_table():
                      "doelgroep VARCHAR(45))")
 
     mycursor.execute("CREATE TABLE products ("
-                     "id VARCHAR INT PRIMARY KEY, "
+                     "id INT PRIMARY KEY, "
                      "name VARCHAR(255), "
                      "selling_price INT, "
                      "discount INT, "
@@ -99,10 +97,9 @@ def create_table():
 
     mycursor.execute("CREATE TABLE orders ("
                      "session_id VARCHAR(255),"
-                     "product_id VARCHAR(45),"
+                     "product_id INT,"
                      "FOREIGN KEY(session_id) REFERENCES sessions(id),"
                      "FOREIGN KEY(product_id) REFERENCES products(id))")
-
 
 def show_tables():
     mydb = mysql.connect(
