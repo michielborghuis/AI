@@ -3,7 +3,7 @@ import mysql.connector as mysql
 import csv
 
 
-f = open("password.txt", "r")
+f = open("../SP-groepsproject/password.txt", "r")
 password = f.readline()
 f.close()
 
@@ -45,8 +45,6 @@ def create_table():
                      "id VARCHAR(255) PRIMARY KEY, "
                      "segment VARCHAR(45), "
                      "has_sale BOOLEAN, "
-                     "sources VARCHAR(45), "
-                     "_events VARCHAR(255), "
                      "buids_buid VARCHAR(255),"
                      "FOREIGN KEY(buids_buid) REFERENCES buids(buid))")
 
@@ -120,22 +118,9 @@ def show_tables():
         print(x)
 
 
-def add_data():
-    mydb = mysql.connect(
-        host="localhost",
-        user="root",
-        passwd=password,
-        database="webshop"
-    )
-    mycursor = mydb.cursor()
-
-    sql = "INSERT INTO products ()"
-
-
 def run():
     create_database()
     create_table()
     show_tables()
-    #add_data()
 
 run()
