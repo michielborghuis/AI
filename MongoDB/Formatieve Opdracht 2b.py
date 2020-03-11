@@ -100,6 +100,12 @@ def create_table():
                      "FOREIGN KEY(session_id) REFERENCES sessions(id),"
                      "FOREIGN KEY(product_id) REFERENCES products(id))")
 
+    mycursor.execute("CREATE TABLE events ("
+                     "session_id VARCHAR(255),"
+                     "product_id INT,"
+                     "FOREIGN KEY(session_id) REFERENCES sessions(id),"
+                     "FOREIGN KEY(product_id) REFERENCES products(id))")
+
 def show_tables():
     mydb = mysql.connect(
         host="localhost",

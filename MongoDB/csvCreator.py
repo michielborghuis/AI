@@ -10,23 +10,31 @@ prof_col = db.profiles # 2
 prod_col = db.products # 1
 
 ses_cur = ses_col.find()
-prof_cur = prof_col.find()
+prof_cur = prof_col.find().limit(1000)
 prod_cur = prod_col.find()
 
 
 def csvProfiles(data, filename):
-    key_list = ['_id', 'segment']
-    for profile in list(data)[:3]:
+    key_list = ['_id', 'recommendations']
+    key_list_recommendations = ['segment']
+    for profile in list(data):
         value_list = []
         for key in key_list:
             try:
-                value_list.append(profile[key])
+                if key == 'recommendations':
+                    for recommendations_key in profile[key]:
+                        if recommendations_key in key_list_recommendations:
+                            value_list.append(profile[key][recommendations_key])
+                else:
+                    value_list.append(profile[key])
             except:
                 value_list.append('NULL')
 
         with open(filename, 'a', newline='') as file:
             inData = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             inData.writerow(value_list)
+
+csvProfiles(prof_cur, 'profiles.csv')
 
 
 def csvProducten(data, filename):
@@ -56,7 +64,7 @@ def csvProducten(data, filename):
                 inData = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 inData.writerow(value_list)
 
-csvProducten(prod_cur, 'producten.csv')
+#csvProducten(prod_cur, 'producten.csv')
 
 ###sessies werkt niet, products wel.
 
@@ -103,4 +111,4 @@ def csvSessies(data, filename):
                 inData = csv.writer(c, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 inData.writerow(key_list_preferences)
 
-csvSessies(ses_cur, 'sessions.csv')
+#csvSessies(ses_cur, 'sessions.csv')
