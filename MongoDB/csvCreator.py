@@ -14,6 +14,21 @@ prof_cur = prof_col.find()
 prod_cur = prod_col.find()
 
 
+def csvProfiles(data, filename):
+    key_list = ['_id', 'segment']
+    for profile in list(data)[:3]:
+        value_list = []
+        for key in key_list:
+            try:
+                value_list.append(profile[key])
+            except:
+                value_list.append('NULL')
+
+        with open(filename, 'a', newline='') as file:
+            inData = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            inData.writerow(value_list)
+
+
 def csvProducten(data, filename):
     key_list = ['_id', 'name', 'price', 'herhaalaankopen', 'color', 'description', 'properties', 'size']
     key_list_price = ['selling_price', 'discount']

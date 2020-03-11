@@ -45,7 +45,6 @@ def create_table():
                      "id VARCHAR(255) PRIMARY KEY, "
                      "segment VARCHAR(45), "
                      "has_sale BOOLEAN, "
-                     "_order VARCHAR(255), "
                      "sources VARCHAR(45), "
                      "_events VARCHAR(255), "
                      "buids_buid VARCHAR(255),"
