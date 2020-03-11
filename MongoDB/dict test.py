@@ -1,0 +1,5 @@
+producten = [
+    {kip : },
+    {patat : },
+    {appelmoes : }
+]
