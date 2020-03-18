@@ -1,18 +1,11 @@
-import pymongo
 import mysql.connector as mysql
-import csv
-
-
-f = open("../SP-groepsproject/password.txt", "r")
-password = f.readline()
-f.close()
 
 
 def create_database():
     mydb = mysql.connect(
         host="localhost",
         user="root",
-        passwd=password
+        passwd='Michiel1805'
     )
     mycursor = mydb.cursor()
 
@@ -24,7 +17,7 @@ def create_table():
     mydb = mysql.connect(
         host="localhost",
         user="root",
-        passwd=password,
+        passwd='Michiel1805',
         database="webshop"
     )
     mycursor = mydb.cursor()
@@ -38,15 +31,13 @@ def create_table():
 
     mycursor.execute("CREATE TABLE buids ("
                      "buid VARCHAR(255) PRIMARY KEY,"
-                     "profiles_id VARCHAR(255),"
-                     "FOREIGN KEY(profiles_id) REFERENCES profiles(id))")
+                     "profiles_id VARCHAR(255))")
 
     mycursor.execute("CREATE TABLE sessions ("
                      "id VARCHAR(255) PRIMARY KEY, "
+                     "buids_buid VARCHAR(255), "
                      "segment VARCHAR(45), "
-                     "has_sale BOOLEAN, "
-                     "buids_buid VARCHAR(255),"
-                     "FOREIGN KEY(buids_buid) REFERENCES buids(buid))")
+                     "has_sale BOOLEAN)")
 
     mycursor.execute("CREATE TABLE brands ("
                      "id INT PRIMARY KEY, "
@@ -54,9 +45,7 @@ def create_table():
 
     mycursor.execute("CREATE TABLE categories ("
                      "id INT PRIMARY KEY, "
-                     "cat VARCHAR(45),"
-                     "subcat VARCHAR(45),"
-                     "subsubcat VARCHAR(45))")
+                     "cat VARCHAR(45))")
 
     mycursor.execute("CREATE TABLE genders ("
                      "id INT PRIMARY KEY, "
@@ -73,7 +62,7 @@ def create_table():
                      "discount INT, "
                      "herhaalaankopen BOOLEAN, "
                      "kleur VARCHAR(255), "
-                     "descr VARCHAR(255), "
+                     "descr VARCHAR(10000), "
                      "eenheid VARCHAR(255), "
                      "inhoud VARCHAR(255), "
                      "leeftijd VARCHAR(255), "
@@ -86,29 +75,21 @@ def create_table():
                      "brand_id INT, "
                      "cat_id INT, "
                      "gender_id INT, "
-                     "doelgroep_id INT, "
-                     "FOREIGN KEY(brand_id) REFERENCES brands(id),"
-                     "FOREIGN KEY(cat_id) REFERENCES categories(id),"
-                     "FOREIGN KEY(gender_id) REFERENCES genders(id),"
-                     "FOREIGN KEY(doelgroep_id) REFERENCES doelgroepen(id))")
+                     "doelgroep_id INT)")
 
-    mycursor.execute("CREATE TABLE orders ("
-                     "session_id VARCHAR(255),"
-                     "product_id INT,"
-                     "FOREIGN KEY(session_id) REFERENCES sessions(id),"
-                     "FOREIGN KEY(product_id) REFERENCES products(id))")
+    # mycursor.execute("CREATE TABLE orders ("
+    #                  "session_id VARCHAR(255),"
+    #                  "product_id INT)")
 
-    mycursor.execute("CREATE TABLE events ("
-                     "session_id VARCHAR(255),"
-                     "product_id INT,"
-                     "FOREIGN KEY(session_id) REFERENCES sessions(id),"
-                     "FOREIGN KEY(product_id) REFERENCES products(id))")
+    # mycursor.execute("CREATE TABLE events ("
+    #                  "session_id VARCHAR(255),"
+    #                  "product_id INT)")
 
 def show_tables():
     mydb = mysql.connect(
         host="localhost",
         user="root",
-        passwd=password,
+        passwd='Michiel1805',
         database="webshop"
     )
     mycursor = mydb.cursor()

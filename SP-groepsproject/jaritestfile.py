@@ -9,9 +9,9 @@ ses_col = db.sessions # 3
 prof_col = db.profiles # 2
 prod_col = db.products # 1
 
-ses_cur = ses_col.find().limit(10000)
-prof_cur = prof_col.find().limit(10000)
-prod_cur = prod_col.find().limit(10000)
+ses_cur = ses_col.find().limit(1000)
+prof_cur = prof_col.find().limit(1000)
+prod_cur = prod_col.find().limit(1000)
 
 
 def csvWriter(filename, list):
@@ -60,8 +60,6 @@ def csvProducten(data):
     possible_brands = []
     possible_doelgroepen = []
     possible_categories = []
-    possible_subcategories = []
-    possible_subsubcategories = []
     for num, i in enumerate(list(data)):
         value_list = []
         for y in key_list:
@@ -84,24 +82,6 @@ def csvProducten(data):
                     else:
                         possible_categories.append(i[y])
                         value_list.append(possible_categories.index(i[y]))
-                elif y == 'subcategory':
-                    try:
-                        if i[y] in possible_subcategories:
-                            value_list.append(possible_categories.index(i[y]))
-                        else:
-                            possible_subcategories.append(i[y])
-                            value_list.append(possible_categories.index(i[y]))
-                    except:
-                        pass
-                elif y == 'subsubcategory':
-                    try:
-                        if i[y] in possible_subsubcategories:
-                            value_list.append(possible_categories.index(i[y]))
-                        else:
-                            possible_subsubcategories.append(i[y])
-                            value_list.append(possible_categories.index(i[y]))
-                    except:
-                        pass
                 elif y == 'price':
                     for j in i[y]:
                         if j in key_list_price:
@@ -109,6 +89,7 @@ def csvProducten(data):
                 elif y == 'properties':
                     for j in i[y]:
                         if j in key_list_properties:
+                            print(i[y][j])
                             if j == "doelgroep":
                                 possible_doelgroepen.append(i[y][j])
                                 value_list.append(possible_doelgroepen.index(i[y][j]))
@@ -120,8 +101,8 @@ def csvProducten(data):
                 print(Exception)
                 pass
         csvWriter('products.csv', value_list)
-    writecsv("doelgroep.csv", possible_doelgroepen)
-    writecsv("gender.csv", possible_gender)
+    writecsv("doelgroepen.csv", possible_doelgroepen)
+    writecsv("genders.csv", possible_gender)
     writecsv("brands.csv", possible_brands)
     writecsv("categories.csv", possible_categories)
 
@@ -145,6 +126,7 @@ def csvSessies(data, filename):
                 elif y == 'buid':
                     for j in i[y]:
                         buid_list.append(j)
+                        value_list.append(j)
                 elif y == 'order':
                     if i[y] is not None:
                         for j in i[y]:
@@ -173,8 +155,19 @@ def csvSessies(data, filename):
             except:
                 pass
         csvWriter(filename, value_list)
-        csvWriter('buid.csv', buid_list)
+        csvWriter('buids.csv', buid_list)
+
+def swap_buids():
+    with open('buids.csv', 'r', newline='') as in_file_handle:
+        reader = csv.reader(in_file_handle)
+        content = []
+        for row in reader:
+            content.append([row[1]] + [row[0]] + row[2:])
+        with open('buids.csv', 'w', newline='') as out_file_handle:
+            writer = csv.writer(out_file_handle)
+            writer.writerows(content)
 
 csvSessies(ses_cur, 'sessions.csv')
-# csvProfiles(prof_cur, 'profiles.csv')
-# csvProducten(prod_cur)
+csvProfiles(prof_cur, 'profiles.csv')
+csvProducten(prod_cur)
+swap_buids()

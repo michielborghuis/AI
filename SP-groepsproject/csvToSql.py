@@ -17,33 +17,40 @@ def add_data():
     mycursor = mydb.cursor()
 
 
-    with open('profiles.csv') as csv_file:
+    with open('brands.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             id=row[0]
-            segment=row[1]
-            mycursor.execute('''INSERT INTO profiles(id,segment)
-                VALUES ('{}','{}')'''.format(id,segment))
+            brand=row[1]
+            mycursor.execute('''INSERT INTO profiles(id,brand)
+                VALUES ('{}','{}')'''.format(id,brand))
             mydb.commit()
 
-    with open('buid.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            buid=row[0]
-            profiles_id=row[1]
-            mycursor.execute('''INSERT INTO buids(buid, profiles_id)
-                VALUES ('{}','{}')'''.format(buid, profiles_id))
-            mydb.commit()
-
-    with open('sessions.csv') as csv_file:
+    with open('doelgroep.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             id=row[0]
-            segment=row[1]
-            has_sale=row[2]
-            buids_buid=row[3]
-            mycursor.execute('''INSERT INTO profiles(id,segment,has_sale,buids_buid)
-                VALUES ('{}','{}')'''.format(id,segment,has_sale,buids_buid))
+            doelgroep=row[1]
+            mycursor.execute('''INSERT INTO doelgroepen(id, doelgroep)
+                VALUES ('{}','{}')'''.format(id, doelgroep))
+            mydb.commit()
+
+    with open('gender.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            id=row[0]
+            gender=row[1]
+            mycursor.execute('''INSERT INTO genders(id,gender)
+                VALUES ('{}','{}')'''.format(id,gender))
+            mydb.commit()
+
+    with open('categories.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            id=row[0]
+            cat=row[1]
+            mycursor.execute('''INSERT INTO categories(id,cat)
+                VALUES ('{}','{}')'''.format(id,cat))
             mydb.commit()
 
 def run():
