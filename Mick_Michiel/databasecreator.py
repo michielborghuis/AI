@@ -81,7 +81,6 @@ def create_table():
                      "sterkte VARCHAR(255), "
                      "tax VARCHAR(255), "
                      "weekdeal BOOLEAN, "
-                     "size VARCHAR(255), "
                      "brand_id INT, "
                      "cat_id INT, "
                      "gender_id INT, "
