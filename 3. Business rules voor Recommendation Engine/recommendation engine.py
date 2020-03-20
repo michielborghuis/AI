@@ -70,7 +70,6 @@ def profiles():
 def profile_product(profile):
     id = query_maker_like('prodid', 'profiles_previously_viewed', 'profid', profile)
     id = string_to_integers(id)
-    print(id)
     return id
 
 
@@ -79,24 +78,23 @@ profile_product('5a393d68ed295900010384ca')
 def product_category(id):
     category = query_maker_like('category', 'products', 'id', str(id))
     category = remove_bad_chars(category)
-    print(category)
     return remove_bad_chars(category)
 
 
-product_category(45281)
-
-
 def recommend_1():
-    recommmendation_dict = {}
+    recommendation_dict = {}
     profiles2 = profiles()
     for profile in profiles2:
+        print(profile)
         recommendations_product_ids = []
         product_id = profile_product(profile)
         category = product_category(product_id)
         recommendations = query_maker_like_limit('id', 'products', 'category', category, 4)
         for id in recommendations:
             recommendations_product_ids.append(string_to_integers(id))
-
+        key_value = {profiles : recommendations_product_ids}
+        recommendation_dict.update(key_value)
+    print(recommendation_dict)
 
 recommend_1()
 
