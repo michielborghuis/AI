@@ -1,6 +1,5 @@
 import mysql.connector as mysql
 import re
-from psycopg2 import sql
 
 
 def string_to_integers(string):
@@ -73,8 +72,6 @@ def profile_product(profile):
     return id
 
 
-profile_product('5a393d68ed295900010384ca')
-
 def product_category(id):
     category = query_maker_like('category', 'products', 'id', str(id))
     category = remove_bad_chars(category)
@@ -83,26 +80,16 @@ def product_category(id):
 
 def recommend_1():
     recommendation_dict = {}
-    profiles2 = profiles()
-    for profile in profiles2:
-        print(profile)
+    for profile in profiles():
         recommendations_product_ids = []
         product_id = profile_product(profile)
         category = product_category(product_id)
         recommendations = query_maker_like_limit('id', 'products', 'category', category, 4)
         for id in recommendations:
             recommendations_product_ids.append(string_to_integers(id))
-        key_value = {profiles : recommendations_product_ids}
+        key_value = {profile : recommendations_product_ids}
         recommendation_dict.update(key_value)
-    print(recommendation_dict)
-
-recommend_1()
 
 
-
-
-# profile()
-#
-# def run():
-#     product_category()
-# run()
+def run():
+    recommend_1()
