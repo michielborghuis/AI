@@ -1,6 +1,4 @@
-import pymongo
 import mysql.connector as mysql
-import csv
 
 
 f = open("password.txt", "r")

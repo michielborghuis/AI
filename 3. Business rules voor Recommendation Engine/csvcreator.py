@@ -21,7 +21,6 @@ prod_cur = prod_col.find().limit(1000)
 def csvWriter(filename, list):
     try:
         with open(filename, "a", newline='') as file:
-            #inData = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
             inData = csv.writer(file, delimiter=',')
             inData.writerow(list)
 
