@@ -68,8 +68,13 @@ def query_maker_like_limit(column, table, column2, like, limit):
 
 
 def profiles():
+    count = input("Geef aantal profiles waarvoor je de recommendations uit wil rekenen (aantal onder de 50 aanbevolen): ")
+    try:
+        count = int(count)
+    except:
+        profiles()
     profiles = []
-    data = query_maker_limit('profid', 'profiles_previously_viewed', '10')
+    data = query_maker_limit('profid', 'profiles_previously_viewed', count)
     for i in data:
         if remove_bad_chars(i) in profiles:
             continue
@@ -104,6 +109,4 @@ def recommend_1():
 
 def run():
     recommend_1()
-
-
 run()
