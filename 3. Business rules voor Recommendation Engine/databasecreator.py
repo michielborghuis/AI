@@ -36,16 +36,15 @@ def create_table():
                      "id VARCHAR(255) PRIMARY KEY,"
                      "segment VARCHAR(255))")
 
-    mycursor.execute("CREATE TABLE buids ("
-                     "buid VARCHAR(255) PRIMARY KEY,"
-                     "profiles_id VARCHAR(255),"
-                     "FOREIGN KEY(profiles_id) REFERENCES profiles(id))")
+    # mycursor.execute("CREATE TABLE buids ("
+    #                  "buid VARCHAR(255) PRIMARY KEY,"
+    #                  "profiles_id VARCHAR(255))")
 
     mycursor.execute("CREATE TABLE sessions ("
                      "id VARCHAR(255) PRIMARY KEY, "
-                     "segment VARCHAR(45), "
-                     "has_sale BOOLEAN, "
-                     "buids_buid VARCHAR(255))")
+                     "buids_buid VARCHAR(255),"
+                     "segment VARCHAR(45),"
+                     "has_sale BOOLEAN)")
 
     mycursor.execute("CREATE TABLE brands ("
                      "id INT PRIMARY KEY, "
@@ -53,9 +52,7 @@ def create_table():
 
     mycursor.execute("CREATE TABLE categories ("
                      "id INT PRIMARY KEY, "
-                     "cat VARCHAR(45),"
-                     "subcat VARCHAR(45),"
-                     "subsubcat VARCHAR(45))")
+                     "cat VARCHAR(45))")
 
     mycursor.execute("CREATE TABLE genders ("
                      "id INT PRIMARY KEY, "
@@ -66,13 +63,16 @@ def create_table():
                      "doelgroep VARCHAR(45))")
 
     mycursor.execute("CREATE TABLE products ("
-                     "id INT PRIMARY KEY, "
+                     "id VARCHAR(255) PRIMARY KEY, "
                      "name VARCHAR(255), "
+                     "gender_id INT, "
+                     "cat_id INT, "
+                     "brand_id INT, "
                      "selling_price INT, "
                      "discount INT, "
                      "herhaalaankopen BOOLEAN, "
                      "kleur VARCHAR(255), "
-                     "descr VARCHAR(255), "
+                     "doelgroep_id INT,"
                      "eenheid VARCHAR(255), "
                      "inhoud VARCHAR(255), "
                      "leeftijd VARCHAR(255), "
@@ -81,26 +81,24 @@ def create_table():
                      "sterkte VARCHAR(255), "
                      "tax VARCHAR(255), "
                      "weekdeal BOOLEAN, "
-                     "brand_id INT, "
-                     "cat_id INT, "
-                     "gender_id INT, "
-                     "doelgroep_id INT, "
+                     "size VARCHAR(255), "
                      "FOREIGN KEY(brand_id) REFERENCES brands(id),"
                      "FOREIGN KEY(cat_id) REFERENCES categories(id),"
                      "FOREIGN KEY(gender_id) REFERENCES genders(id),"
                      "FOREIGN KEY(doelgroep_id) REFERENCES doelgroepen(id))")
 
-    mycursor.execute("CREATE TABLE orders ("
-                     "session_id VARCHAR(255),"
-                     "product_id INT,"
-                     "FOREIGN KEY(session_id) REFERENCES sessions(id),"
-                     "FOREIGN KEY(product_id) REFERENCES products(id))")
+    # mycursor.execute("CREATE TABLE orders ("
+    #                  "session_id VARCHAR(255),"
+    #                  "product_id INT,"
+    #                  "FOREIGN KEY(session_id) REFERENCES sessions(id),"
+    #                  "FOREIGN KEY(product_id) REFERENCES products(id))")
+    #
+    # mycursor.execute("CREATE TABLE events ("
+    #                  "session_id VARCHAR(255),"
+    #                  "product_id INT,"
+    #                  "FOREIGN KEY(session_id) REFERENCES sessions(id),"
+    #                  "FOREIGN KEY(product_id) REFERENCES products(id))")
 
-    mycursor.execute("CREATE TABLE events ("
-                     "session_id VARCHAR(255),"
-                     "product_id INT,"
-                     "FOREIGN KEY(session_id) REFERENCES sessions(id),"
-                     "FOREIGN KEY(product_id) REFERENCES products(id))")
 
 def show_tables():
     mydb = mysql.connect(
