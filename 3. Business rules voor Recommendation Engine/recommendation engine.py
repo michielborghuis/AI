@@ -1,5 +1,17 @@
 import mysql.connector as mysql
 import re
+import csv
+
+
+def csvWriter(filename, list):
+    try:
+        with open(filename, "a", newline='') as file:
+            inData = csv.writer(file, delimiter=',')
+            inData.writerow(list)
+
+    except:
+        print(Exception)
+        pass
 
 
 def string_to_integers(string):
@@ -79,17 +91,19 @@ def product_category(id):
 
 
 def recommend_1():
-    recommendation_dict = {}
     for profile in profiles():
-        recommendations_product_ids = []
+        valueList = []
+        valueList.append(profile)
         product_id = profile_product(profile)
         category = product_category(product_id)
         recommendations = query_maker_like_limit('id', 'products', 'category', category, 4)
         for id in recommendations:
-            recommendations_product_ids.append(string_to_integers(id))
-        key_value = {profile : recommendations_product_ids}
-        recommendation_dict.update(key_value)
+            valueList.append(string_to_integers(id))
+        csvWriter('recommendation1.csv', valueList)
 
 
 def run():
     recommend_1()
+
+
+run()
