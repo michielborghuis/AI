@@ -35,7 +35,7 @@ def writecsv(name, possible_watdanook):
             value_list_watdanook = []
             value_list_watdanook.append(possible_watdanook.index(i))
             value_list_watdanook.append(i)
-            inData = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+            inData = csv.writer(file, delimiter=',')
             inData.writerow(value_list_watdanook)
 
 
