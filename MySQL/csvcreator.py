@@ -223,3 +223,6 @@ csvSessies(ses_cur, 'sessions.csv')
 csvProfiles(prof_cur, 'profiles.csv')
 csvProducten(prod_cur)
 swap_buids()
+
+
+#v.replace('\u1d49','').replace('\u207a','').replace('\ufffd','').replace('\u2103','').replace('\u200b','').replace('\u2713','').replace('\u25cf','')
